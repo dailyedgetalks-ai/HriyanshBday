@@ -187,26 +187,25 @@
             flex-wrap: wrap;
             position: relative;
             z-index: 1;
-            max-width: 100%;
-            @media (max-width: 768px) {
-    .about-content {
-        gap: 15px;         
-        padding: 0 10px;   
+            max-width: 100%
+        }
+       .about-text {
+    flex: 1;
+    min-width: 300px;  /* keeps a nice width on bigger screens */
+}
+
+@media (max-width: 480px) {
+    .about-text {
+        min-width: 100%;   /* take full width on small screens */
+        padding: 0 10px;   /* safe spacing so text doesn't touch edges */
+        box-sizing: border-box;
     }
 
-        }
-
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .about-text p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #5a5a5a;
-            margin-bottom: 20px;
-        }
+    .about-text p {
+        font-size: 1rem;   /* slightly smaller font for readability */
+        line-height: 1.6;
+    }
+}
 
         .highlight {
             background: linear-gradient(120deg, rgba(255,107,107,0.2) 0%, rgba(255,230,109,0.2) 100%);
@@ -484,6 +483,7 @@ background-image: linear-gradient(147deg, #FADADD 0%, #fc6c85 74%);
 </body>
 
 </html>
+
 
 
 
