@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 2nd Birthday!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #a1c4fd 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Balloons */
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            opacity: 0.8;
+            animation: float 15s infinite ease-in-out;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .balloon:hover {
+            transform: scale(1.1);
+        }
+
+        .balloon:active {
+            animation: pop 0.5s forwards;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100vh) rotate(10deg);
+            }
+            100% {
+                transform: translateY(-120vh) rotate(0deg);
+            }
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #ff4d6d;
+            text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0,0,0,0.1);
+            margin-bottom: 0.5rem;
+            animation: bounce 2s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-15px); }
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: #4361ee;
+            margin-bottom: 1rem;
+        }
+
+        /* Birthday Countdown */
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: #4361ee;
+            color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            min-width: 100px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Photo Gallery */
+        .gallery {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #ff4d6d;
+            margin-bottom: 1.5rem;
+        }
+
+        .photos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .photo {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .photo:hover {
+            transform: scale(1.05);
+        }
+
+        .photo img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Birthday Wishes */
+        .wishes {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .wishes h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #4361ee;
+            margin-bottom: 1.5rem;
+        }
+
+        .wish-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .wish-form input,
+        .wish-form textarea {
+            padding: 1rem;
+            border-radius: 10px;
+            border: none;
+            font-size: 1.1rem;
+            font-family: inherit;
+        }
+
+        .wish-form button {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .wish-form button:hover {
+            background: #ff3366;
+        }
+
+        .wish-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .wish {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .wish-author {
+            font-weight: bold;
+            color: #4361ee;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Interactive Elements */
+        .interactive {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .interactive h2 {
+            font-size: 2.5rem;
+            color: #ff9a9e;
+            margin-bottom: 1.5rem;
+        }
+
+        .cake-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .cake {
+            width: 200px;
+            height: 150px;
+            background: #ffd166;
+            border-radius: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .cake:before {
+            content: '';
+            position: absolute;
+            width: 180px;
+            height: 30px;
+            background: #ef476f;
+            border-radius: 10px;
+            top: -15px;
+            left: 10px;
+        }
+
+        .candle {
+            position: absolute;
+            width: 15px;
+            height: 50px;
+            background: #ffffff;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        .flame {
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background: #ff9a1a;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: -25px;
+            left: -2.5px;
+            animation: flicker 1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .blow-button {
+            background: #4361ee;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .blow-button:hover {
+            background: #3a56d4;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .blow-button:active {
+            transform: translateY(1px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #4361ee;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Modal for Photo Gallery */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            margin: 5% auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80%;
+            animation: zoomIn 0.3s;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #ff4d6d;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .countdown {
+                gap: 0.5rem;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+                padding: 0.8rem;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+            
+            .gallery h2,
+            .wishes h2,
+            .interactive h2 {
+                font-size: 2rem;
+            }
+            
+            .cake-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .cake {
+                width: 150px;
+                height: 120px;
+            }
+            
+            .cake:before {
+                width: 130px;
+                height: 25px;
+                left: 10px;
+            }
+        }
+    </style>
+<style>
+  /* About Me button */
+        .about-btn {
+            background-color: #d3d3d3;
+background-image: linear-gradient(315deg, #d3d3d3 0%, #ff9ff3 74%);
+
+            color: black;
+            border: none;
+            padding: 25px 20px;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .about-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+    .about-btn:active {
+        transform: translateY(2px);
+    }
+
+    .about-btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: all 0.6s;
+    }
+
+    .about-btn:hover:before {
+        left: 100%;
+    }
+
+    .about-btn span {
+        position: relative;
+        z-index: 1;
+    }
+
+    .about-btn .icon {
+        display: inline-block;
+        margin-left: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .about-btn:hover .icon {
+        transform: translateX(5px);
+    }
+
+    .btn-ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+    }
+
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+</style>
+
+<!-- Add this HTML where you want the button to appear -->
+<a href="about-me.html" class="about-btn" id="aboutBtn">
+    <span>About Me <i class="fas fa-baby icon"></i></span>
+</a>
+
+    </body>
+</head>
+<body>
+    <!-- Floating Balloons -->
+    <div class="balloon" style="left: 10%; animation-delay: 0s;">
+        <i class="fas fa-circle" style="font-size: 60px; color: #ff4d6d;"></i>
+    </div>
+    <div class="balloon" style="left: 20%; animation-delay: 2s;">
+        <i class="fas fa-circle" style="font-size: 70px; color: #4361ee;"></i>
+    </div>
+    <div class="balloon" style="left: 35%; animation-delay: 5s;">
+        <i class="fas fa-circle" style="font-size: 50px; color: #ffd166;"></i>
+    </div>
+    <div class="balloon" style="left: 50%; animation-delay: 1s;">
+        <i class="fas fa-circle" style="font-size: 80px; color: #06d6a0;"></i>
+    </div>
+    <div class="balloon" style="left: 65%; animation-delay: 4s;">
+        <i class="fas fa-circle" style="font-size: 60px; color: #ff9a1a;"></i>
+    </div>
+    <div class="balloon" style="left: 80%; animation-delay: 3s;">
+        <i class="fas fa-circle" style="font-size: 70px; color: #8338ec;"></i>
+    </div>
+    <div class="balloon" style="left: 90%; animation-delay: 6s;">
+        <i class="fas fa-circle" style="font-size: 50px; color: #3a86ff;"></i>
+    </div>
+
+    <header>
+        <h1>Happy 2nd Birthday!</h1>
+        <p class="subtitle">Celebrating our little superstar on September 11th</p>
+    </header>
+
+    <div class="countdown-container">
+        <h2>Countdown to Birthday</h2>
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <span class="countdown-value" id="days">0</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-value" id="hours">0</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-value" id="minutes">0</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-value" id="seconds">0</span>
+                <span class="countdown-label">Seconds</span>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="gallery">
+            <h2>Birthday Boy Gallery</h2>
+            <div class="photos">
+                <div class="photo">
+                    <img src="C:\Users\HP\Pictures/Hriyansh.jpg" alt="Baby Photo 1">
+                </div>
+                <div class="photo">
+                    <img src="C:\Users\HP\Pictures/Hriyansh6.jpg" alt="Baby Photo 2">
+                </div>
+                <div class="photo">
+                    <img src="C:\Users\HP\Pictures/Hriyansh2.jpg" alt="Baby Photo 3">
+                </div>
+                <div class="photo">
+                    <img src="C:\Users\HP\Pictures/Hriyansh3.jpg" alt="Baby Photo 4">
+                </div>
+                <div class="photo">
+                    <img src="C:\Users\HP\Pictures/Hriyansh4.jpg" alt="Baby Photo 5">
+                </div>
+                <div class="photo">
+                    <img src="C:\Users\HP\Pictures/Hriyansh5.jpg" alt="Baby Photo 6">
+                </div>
+            </div>
+        </section>
+
+        <section class="wishes">
+            <h2>Birthday Wishes</h2>
+            <form class="wish-form" id="wishForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <textarea id="message" placeholder="Wish Hriyansh Good Luck!" rows="3" required></textarea>
+                <button type="submit">Send Wish</button>
+            </form>
+            <div class="wish-list" id="wishList">
+                <!-- Wishes will be added here dynamically -->
+            </div>
+        </section>
+
+        <section class="interactive">
+            <h2>Blow Out the Candles!</h2>
+            <div class="cake-container">
+                <div class="cake">
+                    <div class="candle">
+                        <div class="flame" id="flame"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="blow-button" id="blowButton">Blow the Candles!</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with <i class="fas fa-heart" style="color: #ff4d6d;"></i> for our special 2-year-old</p>
+    </footer>
+
+    <!-- Modal for Photo Gallery -->
+    <div id="photoModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const today = new Date();
+            const currentYear = today.getFullYear();
+            
+            // Check if September 11th has passed this year
+            let birthday = new Date(currentYear, 8, 11); // Month is 0-indexed (8 = September)
+            if (today > birthday) {
+                birthday = new Date(currentYear + 1, 8, 11);
+            }
+            
+            const birthdayTime = birthday.getTime();
+            const now = today.getTime();
+            const distance = birthdayTime - now;
+            
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = "<h2>Happy Birthday! 🎉</h2>";
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Balloon Pop
+        document.querySelectorAll('.balloon').forEach(balloon => {
+            balloon.addEventListener('click', function() {
+                this.style.animation = 'pop 0.5s forwards';
+                setTimeout(() => {
+                    this.style.animation = 'float 15s infinite ease-in-out';
+                    this.style.bottom = '-150px';
+                }, 500);
+            });
+        });
+
+        // Photo Gallery Modal
+        const modal = document.getElementById('photoModal');
+        const modalImg = document.getElementById('modalImage');
+        
+        document.querySelectorAll('.photo img').forEach(img => {
+            img.addEventListener('click', function() {
+                modal.style.display = 'block';
+                modalImg.src = this.src;
+            });
+        });
+        
+        document.querySelector('.close').addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Birthday Wishes
+        const wishForm = document.getElementById('wishForm');
+        const wishList = document.getElementById('wishList');
+        
+        // Sample wishes
+        const sampleWishes = [
+            { name: "Mom", message: "Happy 2nd birthday to our amazing little boy! We love you more than words can say!" },
+            { name: "Grandma", message: "Wishing you a day filled with laughter, fun, and lots of cake! Happy birthday sweetie!" },
+            { name: "Dad", message: "Two years old already! Hope you have a fantastic birthday with lots of presents!" }
+        ];
+        
+        // Load sample wishes
+        sampleWishes.forEach(wish => {
+            addWishToList(wish.name, wish.message);
+        });
+        
+        wishForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && message) {
+                addWishToList(name, message);
+                wishForm.reset();
+            }
+        });
+        
+        function addWishToList(name, message) {
+            const wishDiv = document.createElement('div');
+            wishDiv.className = 'wish';
+            wishDiv.innerHTML = `
+                <div class="wish-author">${name}</div>
+                <div>${message}</div>
+            `;
+            wishList.prepend(wishDiv);
+        }
+
+        // Blow Candles
+        const blowButton = document.getElementById('blowButton');
+        const flame = document.getElementById('flame');
+        
+        blowButton.addEventListener('click', function() {
+            flame.style.animation = 'none';
+            setTimeout(() => {
+                flame.style.display = 'none';
+                this.textContent = 'Happy Birthday!';
+                this.style.background = '#06d6a0';
+                
+                // Create confetti
+                createConfetti();
+                
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    flame.style.display = 'block';
+                    flame.style.animation = 'flicker 1s infinite alternate';
+                    this.textContent = 'Blow the Candles!';
+                    this.style.background = '#4361ee';
+                }, 3000);
+            }, 100);
+        });
+        
+        // Confetti Effect
+        function createConfetti() {
+            const colors = ['#ff4d6d', '#4361ee', '#ffd166', '#06d6a0', '#ff9a1a', '#8338ec'];
+            const confettiCount = 100;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '50%';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.opacity = Math.random() + 0.5;
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confetti.style.zIndex = '1000';
+                
+                document.body.appendChild(confetti);
+                
+                // Animate confetti falling
+                let pos = 50;
+                const fall = setInterval(() => {
+                    pos += 2;
+                    confetti.style.top = pos + '%';
+                    confetti.style.transform += `rotate(${Math.random() * 10}deg)`;
+                    
+                    if (pos > 100) {
+                        clearInterval(fall);
+                        confetti.remove();
+                    }
+                }, 20);
+            }
+        }
+    </script>
+<!-- Add this script before the closing </body> tag -->
+<script>
+    document.getElementById('aboutBtn').addEventListener('click', function(e) {
+        // Create ripple element
+        const ripple = document.createElement('span');
+        ripple.classList.add('btn-ripple');
+        
+        // Set ripple size and position
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.right - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        
+        // Add ripple to button
+        this.appendChild(ripple);
+        
+        // Remove ripple after animation completes
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+</script>
+
+</body>
+</html>
