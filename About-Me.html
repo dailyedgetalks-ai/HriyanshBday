@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - My 2nd Birthday!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Floating Animations */
+        .floating {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .balloon {
+            position: absolute;
+            width: 80px;
+            height: 100px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0.8;
+            animation: balloonFloat 8s ease-in-out infinite;
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: #333;
+            left: 50%;
+            bottom: -100px;
+            transform: translateX(-50%);
+        }
+
+        @keyframes balloonFloat {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-30px) translateX(10px); }
+            50% { transform: translateY(-20px) translateX(-10px); }
+            75% { transform: translateY(-40px) translateX(5px); }
+        }
+
+        .balloon1 {
+            background: #ff6b6b;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .balloon2 {
+            background: #4ecdc4;
+            top: 20%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .balloon3 {
+            background: #ffe66d;
+            top: 50%;
+            left: 8%;
+            animation-delay: 2s;
+        }
+
+        .balloon4 {
+            background: #a8e6cf;
+            top: 60%;
+            right: 5%;
+            animation-delay: 3s;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .main-title {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: #ff6b6b;
+            text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #5a5a5a;
+            margin-bottom: 20px;
+        }
+
+        /* Birthday Banner */
+        .birthday-banner {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 3px dashed #fff;
+        }
+
+        .banner-text {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        .banner-subtext {
+            font-size: 1.3rem;
+            color: #fff;
+            opacity: 0.9;
+        }
+
+        /* About Me Section */
+        .about-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .section-title {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #5a5a5a;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255,107,107,0.2) 0%, rgba(255,230,109,0.2) 100%);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .about-image {
+            flex: 0 0 300px;
+            text-align: center;
+        }
+
+        .baby-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 8px solid #ff6b6b;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            object-fit: cover;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Family Section */
+        .family-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .family-member {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .family-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .family-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ff6b6b;
+        }
+
+        .family-name {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 1.8rem;
+            color: #5a5a5a;
+            margin-bottom: 10px;
+        }
+
+        .family-role {
+            font-size: 1.2rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .family-detail {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Fun Facts */
+        .fun-facts {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .fact-item {
+            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .fact-icon {
+            font-size: 2.5rem;
+            color: #4ecdc4;
+            margin-bottom: 15px;
+        }
+
+        .fact-text {
+            font-size: 1.1rem;
+            color: #5a5a5a;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #5a5a5a;
+            font-size: 1.1rem;
+        }
+
+        .heart {
+            color: #ff6b6b;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                flex: none;
+            }
+            
+            .banner-text {
+                font-size: 2rem;
+            }
+            
+            .banner-subtext {
+                font-size: 1.1rem;
+            }
+        }
+ /* Back button */
+        .back-btn {
+                       background-color: #FADADD;
+background-image: linear-gradient(147deg, #FADADD 0%, #fc6c85 74%);
+            color: white;
+            border: none;
+            padding: 25px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+.back-btn:hover {
+            background-color: #7f8c8d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+<a href="Brotherbirthday.html" class="back-btn">Back to Main </a>
+    <!-- Floating Balloons -->
+    <div class="balloon balloon1"></div>
+    <div class="balloon balloon2"></div>
+    <div class="balloon balloon3"></div>
+    <div class="balloon balloon4"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="main-title">All About Me!</h1>
+            <p class="subtitle">I'm turning 2 on September 11, 2025!</p>
+        </header>
+
+        <!-- Birthday Banner -->
+        <div class="birthday-banner">
+            <h2 class="banner-text">🎉 My 2nd Birthday Celebration 🎉</h2>
+            <p class="banner-subtext">Join me for my special day on September 11, 2025!</p>
+        </div>
+
+        <!-- About Me Section -->
+        <section class="about-section">
+            <h2 class="section-title">Meet Me!</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hello everyone! I'm the <span class="highlight">happiest little toddler</span> you'll ever meet! I love exploring the world, playing with my toys, and making everyone smile.</p>
+                    <p>I'm growing so fast and learning new things every day! I can't wait to celebrate my <span class="highlight">2nd birthday</span> with all the people I love!</p>
+                    <p>My favorite things are: colorful balloons, yummy snacks, peek-a-boo games, and cuddling with my family!</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Baby Photo" class="baby-photo">
+                </div>
+            </div>
+        </section>
+
+        <!-- Family Section -->
+        <section class="family-section">
+            <h2 class="section-title">My Loving Family</h2>
+            <div class="family-grid">
+                <div class="family-member">
+                    <div class="family-icon"><i class="fas fa-heart"></i></div>
+                    <h3 class="family-name">Rashmi</h3>
+                    <p class="family-role">My Mommy</p>
+                    <p class="family-detail">Gives the best cuddles and makes yummy food!</p>
+                </div>
+                <div class="family-member">
+                    <div class="family-icon"><i class="fas fa-heart"></i></div>
+                    <h3 class="family-name">Vinay</h3>
+                    <p class="family-role">My Daddy</p>
+                    <p class="family-detail">Gives the best piggyback rides and tells funny stories!</p>
+                </div>
+                <div class="family-member">
+                    <div class="family-icon"><i class="fas fa-heart"></i></div>
+                    <h3 class="family-name">Vansh</h3>
+                    <p class="family-role">My Big Brother</p>
+                    <p class="family-detail">14 years old and the best playmate ever!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fun Facts -->
+        <section class="fun-facts">
+            <h2 class="section-title">Fun Facts About Me</h2>
+            <div class="facts-grid">
+                <div class="fact-item">
+                    <div class="fact-icon"><i class="fas fa-birthday-cake"></i></div>
+                    <p class="fact-text">Born in 2023</p>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-icon"><i class="fas fa-star"></i></div>
+                    <p class="fact-text">Zodiac Sign: Virgo</p>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-icon"><i class="fas fa-laugh"></i></div>
+                    <p class="fact-text">I have 8 tiny teeth!</p>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-icon"><i class="fas fa-baby"></i></div>
+                    <p class="fact-text">I'm 2 feet tall!</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Made with <span class="heart">♥</span> by my loving family</p>
+        <p>Can't wait to celebrate my 2nd birthday on September 11, 2025!</p>
+    </footer>
+
+    <script>
+        // Add floating animation to family members on hover
+        document.querySelectorAll('.family-member').forEach(member => {
+            member.addEventListener('mouseenter', function() {
+                this.style.animation = 'float 3s ease-in-out infinite';
+            });
+            
+            member.addEventListener('mouseleave', function() {
+                this.style.animation = '';
+            });
+        });
+    </script>
+</body>
+</html>
